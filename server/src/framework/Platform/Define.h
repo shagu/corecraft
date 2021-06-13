@@ -20,7 +20,7 @@
 #define MANGOS_DEFINE_H
 
 #include "Platform/CompilerDefs.h"
-#include <boost/detail/endian.hpp>
+#include <boost/endian.hpp>
 #include <sys/types.h>
 #include <cinttypes>
 #include <cstdint>
