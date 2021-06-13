@@ -34,7 +34,7 @@ TemporarySummon::~TemporarySummon()
 
 void TemporarySummon::Update(uint32 update_diff, uint32 diff)
 {
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     if (m_summonOpts & SUMMON_OPT_DESPAWN_ON_SUMMONER_DEATH)

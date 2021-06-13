@@ -150,7 +150,7 @@ private:
     {
         int pack_id = y * N + x;
         auto itr = cells_.find(pack_id);
-        if (unlikely(itr == cells_.end()))
+        if (itr == cells_.end())
         {
             auto& cell = cells_[pack_id];
             if (cell_create_callback_)
@@ -165,7 +165,7 @@ private:
     {
         int pack_id = y * N + x;
         auto itr = cells_.find(pack_id);
-        if (unlikely(itr == cells_.end()))
+        if (itr == cells_.end())
             return nullptr;
         return &itr->second;
     }

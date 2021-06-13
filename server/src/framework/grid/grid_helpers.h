@@ -153,14 +153,14 @@ inline cell_bounds cell_bounds_from_circle(
     bounds.x_upper = (center_x + radius) / side + N + 1;
     bounds.y_upper = (center_y + radius) / side + N + 1;
 
-    if (unlikely(bounds.x_lower < 0))
+    if (bounds.x_lower < 0)
         bounds.x_lower = 0;
-    if (unlikely(bounds.y_lower < 0))
+    if (bounds.y_lower < 0)
         bounds.y_lower = 0;
     auto n2 = N * 2;
-    if (unlikely(bounds.x_upper > n2))
+    if (bounds.x_upper > n2)
         bounds.x_upper = n2;
-    if (unlikely(bounds.y_upper > n2))
+    if (bounds.y_upper > n2)
         bounds.y_upper = n2;
 
     return bounds;

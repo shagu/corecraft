@@ -284,7 +284,7 @@ static bool hunter_trap_check(
 void GameObject::Update(uint32 update_diff, uint32 p_time)
 {
     // Update Queued Actions
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     if (!m_AI)

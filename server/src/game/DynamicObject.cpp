@@ -135,7 +135,7 @@ void DynamicObject::Update(uint32 update_diff, uint32 p_time)
         return;
     }
 
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     // have radius and work as persistent effect

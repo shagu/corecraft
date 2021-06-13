@@ -12913,7 +12913,7 @@ public:
                 !(cowner->aggro_delay() &&
                     cowner->aggro_delay() > WorldTimer::getMSTime());
 
-            if (unlikely(cowner_can_aggro && cowner->aggro_delay()))
+            if (cowner_can_aggro && cowner->aggro_delay())
                 cowner->aggro_delay(0);
 
             // Visit creatures

@@ -32,7 +32,7 @@ inline float dist_square_2d(Src* src, T* tar)
     float bb = src->GetObjectBoundingRadius() + tar->GetObjectBoundingRadius();
 
     float distsq = dx * dx + dy * dy - bb * bb;
-    if (unlikely(distsq < 0))
+    if (distsq < 0)
         distsq = 0;
 
     return distsq;
@@ -47,7 +47,7 @@ inline float dist_square_3d(Src* src, T* tar)
     float bb = src->GetObjectBoundingRadius() + tar->GetObjectBoundingRadius();
 
     float distsq = dx * dx + dy * dy + dz * dz - bb * bb;
-    if (unlikely(distsq < 0))
+    if (distsq < 0)
         distsq = 0;
 
     return distsq;
@@ -77,7 +77,7 @@ struct simple
     template <typename Source, typename Callback>
     void operator()(Source src, float radius, Callback callback)
     {
-        if (unlikely(radius <= 0))
+        if (radius <= 0)
             return;
 
         auto map = src->GetMap();
@@ -99,7 +99,7 @@ struct simple
     template <typename Source, typename Callback>
     void visit_2d(Source src, float radius, Callback callback)
     {
-        if (unlikely(radius <= 0))
+        if (radius <= 0)
             return;
 
         auto map = src->GetMap();
@@ -133,7 +133,7 @@ struct yield_set
     {
         std::vector<T*> set;
 
-        if (unlikely(radius <= 0))
+        if (radius <= 0)
             return set;
 
         auto map = src->GetMap();
@@ -168,7 +168,7 @@ struct yield_single
     template <typename Source, typename Check>
     T* operator()(Source src, float radius, Check check)
     {
-        if (unlikely(radius <= 0))
+        if (radius <= 0)
             return nullptr;
 
         T* out = nullptr;
@@ -212,7 +212,7 @@ struct yield_best_match
     template <typename Source, typename Check>
     T* operator()(Source src, float radius, Check check)
     {
-        if (unlikely(radius <= 0))
+        if (radius <= 0)
             return nullptr;
 
         T* out = nullptr;
@@ -260,7 +260,7 @@ struct camera_owner
     template <typename Source, typename Callback>
     void operator()(Source src, float radius, Callback callback)
     {
-        if (unlikely(radius <= 0))
+        if (radius <= 0)
             return;
 
         auto map = src->GetMap();

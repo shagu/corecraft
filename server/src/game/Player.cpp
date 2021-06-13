@@ -1129,7 +1129,7 @@ void Player::Update(uint32 update_diff, uint32 p_time)
     if (!IsInWorld())
         return;
 
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     // Player::SetPosition needs to do some action after grid relocation:
@@ -18505,9 +18505,9 @@ bool Player::isHonorOrXPTarget(Unit* pVictim) const
 
 void Player::RewardSinglePlayerAtKill(Unit* pVictim)
 {
-    if (unlikely(pVictim->GetTypeId() == TYPEID_UNIT &&
+    if (pVictim->GetTypeId() == TYPEID_UNIT &&
                  static_cast<Creature*>(pVictim)->GetCreatureType() ==
-                     CREATURE_TYPE_CRITTER))
+                     CREATURE_TYPE_CRITTER)
         return;
 
     bool PvP = pVictim->isCharmedOwnedByPlayerOrPlayer();

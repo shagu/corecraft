@@ -76,7 +76,7 @@ bool Totem::Create(uint32 guidlow, CreatureCreatePos& cPos,
 
 void Totem::Update(uint32 update_diff, uint32 time)
 {
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     // Totems can be owner-less

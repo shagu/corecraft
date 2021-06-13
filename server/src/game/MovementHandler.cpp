@@ -483,7 +483,7 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recv_data)
         moving->GetMap()->GetVisibilityDistance(),
         [this, opcode, saved_time, &movementInfo, moving, sz](Player* p)
         {
-            if (unlikely(_player == p))
+            if (_player == p)
                 return;
 
             auto t = (int64)p->GetSession()->client_tick_count +

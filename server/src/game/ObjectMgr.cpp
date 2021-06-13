@@ -7806,7 +7806,7 @@ void ObjectMgr::add_static_creature(const CreatureData* data)
               maps::cell_id(data->posX, data->posY);
     auto itr = static_creatures_.find(id);
 
-    if (unlikely(itr == static_creatures_.end()))
+    if (itr == static_creatures_.end())
     {
         itr = static_creatures_
                   .insert(std::make_pair(
@@ -7825,7 +7825,7 @@ void ObjectMgr::remove_static_creature(const CreatureData* data)
               maps::cell_id(data->posX, data->posY);
     auto itr = static_creatures_.find(id);
 
-    if (unlikely(itr == static_creatures_.end()))
+    if (itr == static_creatures_.end())
         return;
 
     itr->second.erase(data);
@@ -7834,7 +7834,7 @@ void ObjectMgr::remove_static_creature(const CreatureData* data)
 void ObjectMgr::add_static_game_object(const GameObjectData* data)
 {
     auto info = GetGameObjectInfo(data->id);
-    if (unlikely(!info))
+    if (!info)
     {
         logging.error(
             "ObjectMgr::add_static_game_object: Attempted to add GO with no "
@@ -7842,11 +7842,11 @@ void ObjectMgr::add_static_game_object(const GameObjectData* data)
         return;
     }
 
-    if (unlikely(info->type == GAMEOBJECT_TYPE_TRANSPORT))
+    if (info->type == GAMEOBJECT_TYPE_TRANSPORT)
     {
         auto itr = static_elevators_.find(data->mapid);
 
-        if (unlikely(itr == static_elevators_.end()))
+        if (itr == static_elevators_.end())
         {
             itr = static_elevators_
                       .insert(std::make_pair((int)data->mapid,
@@ -7864,7 +7864,7 @@ void ObjectMgr::add_static_game_object(const GameObjectData* data)
               maps::cell_id(data->posX, data->posY);
     auto itr = static_game_objects_.find(id);
 
-    if (unlikely(itr == static_game_objects_.end()))
+    if (itr == static_game_objects_.end())
     {
         itr = static_game_objects_
                   .insert(std::make_pair(
@@ -7880,7 +7880,7 @@ void ObjectMgr::add_static_game_object(const GameObjectData* data)
 void ObjectMgr::remove_static_game_object(const GameObjectData* data)
 {
     auto info = GetGameObjectInfo(data->id);
-    if (unlikely(!info))
+    if (!info)
     {
         logging.error(
             "ObjectMgr::remove_static_game_object: Attempted to remove GO with "
@@ -7888,10 +7888,10 @@ void ObjectMgr::remove_static_game_object(const GameObjectData* data)
         return;
     }
 
-    if (unlikely(info->type == GAMEOBJECT_TYPE_TRANSPORT))
+    if (info->type == GAMEOBJECT_TYPE_TRANSPORT)
     {
         auto itr = static_game_objects_.find(data->mapid);
-        if (likely(itr != static_game_objects_.end()))
+        if (itr != static_game_objects_.end())
             itr->second.erase(data);
         return;
     }
@@ -7900,7 +7900,7 @@ void ObjectMgr::remove_static_game_object(const GameObjectData* data)
               maps::cell_id(data->posX, data->posY);
     auto itr = static_game_objects_.find(id);
 
-    if (unlikely(itr == static_game_objects_.end()))
+    if (itr == static_game_objects_.end())
         return;
 
     itr->second.erase(data);
@@ -7908,14 +7908,14 @@ void ObjectMgr::remove_static_game_object(const GameObjectData* data)
 
 void ObjectMgr::add_static_corpse(Corpse* corpse)
 {
-    if (unlikely(corpse->GetOwnerGuid().IsEmpty()))
+    if (corpse->GetOwnerGuid().IsEmpty())
         return;
 
     auto id = uint64(corpse->GetMapId()) << uint64(32) |
               maps::cell_id(corpse->GetX(), corpse->GetY());
     auto itr = static_corpses_.find(id);
 
-    if (unlikely(itr == static_corpses_.end()))
+    if (itr == static_corpses_.end())
     {
         itr = static_corpses_.insert(
                                   std::make_pair(id,
@@ -7930,14 +7930,14 @@ void ObjectMgr::add_static_corpse(Corpse* corpse)
 
 void ObjectMgr::remove_static_corpse(Corpse* corpse)
 {
-    if (unlikely(corpse->GetOwnerGuid().IsEmpty()))
+    if (corpse->GetOwnerGuid().IsEmpty())
         return;
 
     auto id = uint64(corpse->GetMapId()) << uint64(32) |
               maps::cell_id(corpse->GetX(), corpse->GetY());
     auto itr = static_corpses_.find(id);
 
-    if (unlikely(itr == static_corpses_.end()))
+    if (itr == static_corpses_.end())
         return;
 
     itr->second.erase(corpse->GetOwnerGuid().GetCounter());
@@ -7949,7 +7949,7 @@ ObjectMgr::get_static_creatures(int map_id, int x, int y) const
     auto id = uint64(map_id) << uint64(32) | maps::cell_id(x, y);
     auto itr = static_creatures_.find(id);
 
-    if (unlikely(itr == static_creatures_.end()))
+    if (itr == static_creatures_.end())
         return nullptr;
 
     return &itr->second;
@@ -7961,7 +7961,7 @@ ObjectMgr::get_static_game_objects(int map_id, int x, int y) const
     auto id = uint64(map_id) << uint64(32) | maps::cell_id(x, y);
     auto itr = static_game_objects_.find(id);
 
-    if (unlikely(itr == static_game_objects_.end()))
+    if (itr == static_game_objects_.end())
         return nullptr;
 
     return &itr->second;
@@ -7973,7 +7973,7 @@ const google::dense_hash_map<uint32, uint32>* ObjectMgr::get_static_corpses(
     auto id = uint64(map_id) << uint64(32) | maps::cell_id(x, y);
     auto itr = static_corpses_.find(id);
 
-    if (unlikely(itr == static_corpses_.end()))
+    if (itr == static_corpses_.end())
         return nullptr;
 
     return &itr->second;
@@ -7984,7 +7984,7 @@ ObjectMgr::get_static_elevators(int map_id) const
 {
     auto itr = static_elevators_.find(map_id);
 
-    if (unlikely(itr == static_elevators_.end()))
+    if (itr == static_elevators_.end())
         return nullptr;
 
     return &itr->second;

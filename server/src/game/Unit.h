@@ -2863,7 +2863,7 @@ void Unit::remove_auras(uint32 id, F func, AuraRemoveMode mode)
         auto holder = elem.second;
         if (holder->IsDisabled())
             continue;
-        if (likely(holder->GetId() != id))
+        if (holder->GetId() != id)
             continue;
         if (func(holder))
             RemoveAuraHolder(holder, mode);

@@ -255,7 +255,7 @@ void StoppedMovementGenerator::finished()
 
 bool StoppedMovementGenerator::update(uint32 diff, uint32)
 {
-    if (unlikely(timer_))
+    if (timer_)
     {
         if (timer_ <= diff)
         {

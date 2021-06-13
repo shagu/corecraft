@@ -244,7 +244,7 @@ void maps::map_grid::relocate(Player* p, float x, float y)
     if (current_cell != new_cell)
     {
         // If in global transit currently; relocates upgrade to global ops
-        if (unlikely(p->in_global_transit))
+        if (p->in_global_transit)
         {
             // Replace current pending global insert
             std::lock_guard<std::mutex> guard(global_mutex_);
@@ -278,7 +278,7 @@ void maps::map_grid::relocate(Player* p, float x, float y)
 void maps::map_grid::update_object(
     Creature* c, uint32 diff, google::dense_hash_set<CreatureGroup*>& groups)
 {
-    if (unlikely(c->GetGroup() != nullptr))
+    if (c->GetGroup() != nullptr)
     {
         groups.insert(c->GetGroup());
         return;
@@ -299,7 +299,7 @@ void maps::map_grid::update_object(
 void maps::map_grid::update_object(TemporarySummon* c, uint32 diff,
     google::dense_hash_set<CreatureGroup*>& groups)
 {
-    if (unlikely(c->GetGroup() != nullptr))
+    if (c->GetGroup() != nullptr)
     {
         groups.insert(c->GetGroup());
         return;
@@ -319,7 +319,7 @@ void maps::map_grid::update_object(TemporarySummon* c, uint32 diff,
 void maps::map_grid::update_object(SpecialVisCreature* c, uint32 diff,
     google::dense_hash_set<CreatureGroup*>& groups)
 {
-    if (unlikely(c->GetGroup() != nullptr))
+    if (c->GetGroup() != nullptr)
     {
         groups.insert(c->GetGroup());
         return;

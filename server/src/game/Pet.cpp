@@ -653,7 +653,7 @@ void Pet::Update(uint32 update_diff, uint32 diff)
     if (m_removed) // pet already removed, just wait in remove queue, no updates
         return;
 
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     switch (m_deathState)

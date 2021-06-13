@@ -390,7 +390,7 @@ void PoolGroup<Creature>::Spawn1Object(
     MapPersistentState& mapState, PoolObject* obj, bool instantly)
 {
     auto data = sObjectMgr::Instance()->GetCreatureData(obj->guid);
-    if (unlikely(!data))
+    if (!data)
         return;
 
     // for non-instanceable maps pool spawn can be at different map from
@@ -401,7 +401,7 @@ void PoolGroup<Creature>::Spawn1Object(
             sMapPersistentStateMgr::Instance()->GetPersistentState(
                 data->mapid, 0);
 
-    if (unlikely(!dataMapState))
+    if (!dataMapState)
         return;
 
     Map* dataMap = dataMapState->GetMap();

@@ -608,7 +608,7 @@ uint32 Creature::ChooseDisplayId(const CreatureInfo* cinfo,
 
 void Creature::Update(uint32 update_diff, uint32 diff)
 {
-    if (unlikely(has_queued_actions()))
+    if (has_queued_actions())
         update_queued_actions(update_diff);
 
     switch (m_deathState)

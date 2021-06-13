@@ -176,7 +176,7 @@ void MapPersistentState::add_persistent_creature(const CreatureData* data)
     auto id = maps::cell_id(data->posX, data->posY);
     auto itr = persistent_creatures_.find(id);
 
-    if (unlikely(itr == persistent_creatures_.end()))
+    if (itr == persistent_creatures_.end())
     {
         itr = persistent_creatures_
                   .insert(std::make_pair(
@@ -194,7 +194,7 @@ void MapPersistentState::add_persistent_game_object(const GameObjectData* data)
     auto id = maps::cell_id(data->posX, data->posY);
     auto itr = persistent_game_objects_.find(id);
 
-    if (unlikely(itr == persistent_game_objects_.end()))
+    if (itr == persistent_game_objects_.end())
     {
         itr = persistent_game_objects_
                   .insert(std::make_pair(
@@ -212,7 +212,7 @@ void MapPersistentState::remove_persistent_creature(const CreatureData* data)
     auto id = maps::cell_id(data->posX, data->posY);
     auto itr = persistent_creatures_.find(id);
 
-    if (unlikely(itr == persistent_creatures_.end()))
+    if (itr == persistent_creatures_.end())
         return;
 
     itr->second.erase(data);
@@ -224,7 +224,7 @@ void MapPersistentState::remove_persistent_game_object(
     auto id = maps::cell_id(data->posX, data->posY);
     auto itr = persistent_game_objects_.find(id);
 
-    if (unlikely(itr == persistent_game_objects_.end()))
+    if (itr == persistent_game_objects_.end())
         return;
 
     itr->second.erase(data);
@@ -236,7 +236,7 @@ MapPersistentState::get_persistent_creatures(int x, int y) const
     auto id = maps::cell_id(x, y);
     auto itr = persistent_creatures_.find(id);
 
-    if (unlikely(itr == persistent_creatures_.end()))
+    if (itr == persistent_creatures_.end())
         return nullptr;
 
     return &itr->second;
@@ -248,7 +248,7 @@ MapPersistentState::get_persistent_game_objects(int x, int y) const
     auto id = maps::cell_id(x, y);
     auto itr = persistent_game_objects_.find(id);
 
-    if (unlikely(itr == persistent_game_objects_.end()))
+    if (itr == persistent_game_objects_.end())
         return nullptr;
 
     return &itr->second;

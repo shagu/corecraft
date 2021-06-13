@@ -1942,7 +1942,7 @@ void WorldObject::BuildMonsterChat(WorldPacket* data, ObjectGuid senderGuid,
 void WorldObject::SendMessageToSet(WorldPacket* data, bool self)
 {
     // if object is in world, map for it already created!
-    if (likely(IsInWorld()))
+    if (IsInWorld())
         GetMap()->broadcast_message(this, data, self);
 }
 
@@ -1950,14 +1950,14 @@ void WorldObject::SendMessageToSetInRange(
     WorldPacket* data, float dist, bool self)
 {
     // if object is in world, map for it already created!
-    if (likely(IsInWorld()))
+    if (IsInWorld())
         GetMap()->broadcast_message(this, data, self, dist, false, true);
 }
 
 void WorldObject::SendMessageToSetExcept(WorldPacket* data, const Player* skip)
 {
     // if object is in world, map for it already created!
-    if (likely(IsInWorld()))
+    if (IsInWorld())
         GetMap()->broadcast_message(this, data, true, 0, false, false, skip);
 }
 
@@ -2474,14 +2474,14 @@ bool WorldObject::PrintCoordinatesError(
 void WorldObject::SetActiveObjectState(bool active)
 {
     // Players cannot be inactive
-    if (unlikely(isType(TYPEMASK_PLAYER)))
+    if (isType(TYPEMASK_PLAYER))
     {
         m_isActiveObject = true;
         return;
     }
 
     // Can only really happen if a DB script is working incorrectly
-    if (unlikely(m_isActiveObject == active))
+    if (m_isActiveObject == active)
         return;
 
     if (IsInWorld())

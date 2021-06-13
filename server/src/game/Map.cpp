@@ -499,8 +499,8 @@ void Map::broadcast_message(WorldObject* src, WorldPacket* msg,
 {
     if (dist == 0)
     {
-        if (unlikely(src->GetTypeId() == TYPEID_UNIT &&
-                     static_cast<Creature*>(src)->special_vis_mob()))
+        if (src->GetTypeId() == TYPEID_UNIT &&
+                     static_cast<Creature*>(src)->special_vis_mob())
             dist = static_cast<Creature*>(src)->special_vis_dist();
         else
             dist = GetVisibilityDistance();
@@ -513,20 +513,20 @@ void Map::broadcast_message(WorldObject* src, WorldPacket* msg,
         {
             auto p = c->GetOwner();
 
-            if (unlikely(!include_src && src == p))
+            if (!include_src && src == p)
                 return;
 
-            if (unlikely(ignore && ignore == p))
+            if (ignore && ignore == p)
                 return;
 
             if (check3d && !src->IsWithinDist(p, dist))
                 return;
 
-            if (unlikely(my_team_only && src->GetTypeId() == TYPEID_PLAYER &&
-                         static_cast<Player*>(src)->GetTeam() == p->GetTeam()))
+            if (my_team_only && src->GetTypeId() == TYPEID_PLAYER &&
+                         static_cast<Player*>(src)->GetTeam() == p->GetTeam())
                 return;
 
-            if (unlikely(!p->HaveAtClient(src)))
+            if (!p->HaveAtClient(src))
             {
                 // Always send chat messages (not for invis GMs though)
                 if (msg->opcode() == SMSG_MESSAGECHAT)
@@ -542,7 +542,7 @@ void Map::broadcast_message(WorldObject* src, WorldPacket* msg,
             }
 
             WorldSession* session = p->GetSession();
-            if (unlikely(session == nullptr))
+            if (session == nullptr)
                 return;
 
             session->send_packet(msg);
@@ -643,8 +643,8 @@ void Map::UpdateObjectVisibility(WorldObject* obj)
 {
     float dist = 0;
 
-    if (unlikely(obj->GetTypeId() == TYPEID_UNIT &&
-                 static_cast<Creature*>(obj)->special_vis_mob()))
+    if (obj->GetTypeId() == TYPEID_UNIT &&
+                 static_cast<Creature*>(obj)->special_vis_mob())
         dist = static_cast<Creature*>(obj)->special_vis_dist();
     else
         dist = GetVisibilityDistance();

@@ -1265,9 +1265,9 @@ static void RewardGroupAtKill_helper(Player* pGroupGuy, Unit* pVictim,
  */
 void Group::RewardGroupAtKill(Unit* pVictim, Player* player_tap)
 {
-    if (unlikely(pVictim->GetTypeId() == TYPEID_UNIT &&
+    if (pVictim->GetTypeId() == TYPEID_UNIT &&
                  static_cast<Creature*>(pVictim)->GetCreatureType() ==
-                     CREATURE_TYPE_CRITTER))
+                     CREATURE_TYPE_CRITTER)
         return;
 
     bool PvP = pVictim->isCharmedOwnedByPlayerOrPlayer();

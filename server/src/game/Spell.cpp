@@ -10234,7 +10234,7 @@ void Spell::FillAreaTargets(UnitList& targetUnitMap, float radius,
     SpellNotifyPushType pushType, SpellTargets spellTargets,
     WorldObject* originalCaster /*=NULL*/)
 {
-    if (unlikely(radius <= 0))
+    if (radius <= 0)
         return;
 
     aoe_targets_worker notifier(

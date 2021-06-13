@@ -211,7 +211,7 @@ void movement::GeneratorQueue::on_event(movement_event e)
 
 void movement::GeneratorQueue::update(uint32 diff)
 {
-    if (likely(!empty()))
+    if (!empty())
     {
 #ifndef NDEBUG
         auto sz = prio_queue_.size();
@@ -229,7 +229,7 @@ void movement::GeneratorQueue::update(uint32 diff)
         }
     }
 
-    if (unlikely(!informs_.empty() && owner_->GetTypeId() == TYPEID_UNIT))
+    if (!informs_.empty() && owner_->GetTypeId() == TYPEID_UNIT)
     {
         auto copy = std::move(informs_);
         informs_.clear();
