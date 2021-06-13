@@ -24,14 +24,13 @@ HMACSHA1::HMACSHA1(uint32 len, uint8* seed)
     assert(len == SEED_KEY_SIZE);
 
     memcpy(&m_key, seed, len);
-    HMAC_CTX_init(&m_ctx);
-    HMAC_Init_ex(&m_ctx, &m_key, SEED_KEY_SIZE, EVP_sha1(), NULL);
+    HMAC_Init_ex(m_ctx, &m_key, SEED_KEY_SIZE, EVP_sha1(), NULL);
 }
 
 HMACSHA1::~HMACSHA1()
 {
     memset(&m_key, 0x00, SEED_KEY_SIZE);
-    HMAC_CTX_cleanup(&m_ctx);
+    HMAC_CTX_free(m_ctx);
 }
 
 void HMACSHA1::UpdateBigNumber(BigNumber* bn)
@@ -41,17 +40,17 @@ void HMACSHA1::UpdateBigNumber(BigNumber* bn)
 
 void HMACSHA1::UpdateData(const uint8* data, int length)
 {
-    HMAC_Update(&m_ctx, data, length);
+    HMAC_Update(m_ctx, data, length);
 }
 
 void HMACSHA1::Initialize()
 {
-    HMAC_Init_ex(&m_ctx, &m_key, SEED_KEY_SIZE, EVP_sha1(), NULL);
+    HMAC_Init_ex(m_ctx, &m_key, SEED_KEY_SIZE, EVP_sha1(), NULL);
 }
 
 void HMACSHA1::Finalize()
 {
     uint32 length = 0;
-    HMAC_Final(&m_ctx, m_digest, &length);
+    HMAC_Final(m_ctx, m_digest, &length);
     assert(length == SHA_DIGEST_LENGTH);
 }

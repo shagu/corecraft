@@ -32,6 +32,6 @@ public:
     void UpdateData(int len, uint8* data);
 
 private:
-    EVP_CIPHER_CTX m_ctx;
+    EVP_CIPHER_CTX *m_ctx = EVP_CIPHER_CTX_new();
 };
 #endif

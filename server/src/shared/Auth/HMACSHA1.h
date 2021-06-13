@@ -40,7 +40,7 @@ public:
     int GetLength() { return SHA_DIGEST_LENGTH; };
 
 private:
-    HMAC_CTX m_ctx;
+    HMAC_CTX *m_ctx = HMAC_CTX_new();
     uint8 m_key[SEED_KEY_SIZE];
     uint8 m_digest[SHA_DIGEST_LENGTH];
 };
